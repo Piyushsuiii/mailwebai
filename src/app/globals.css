@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #02040A;
+  --foreground: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Email body wrapper — force dark theme on HTML email content */
+.email-body-wrapper {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* Override inline white backgrounds from email HTML senders */
+.email-body-wrapper * {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* Keep images visible — don't strip their backgrounds */
+.email-body-wrapper img {
+  background-color: unset !important;
+  background: unset !important;
+}
+
+/* Make email text readable on dark background */
+.email-body-wrapper,
+.email-body-wrapper * {
+  color: #d4d4d8 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Links should be visible */
+.email-body-wrapper a {
+  color: #60a5fa !important;
+}
+
+/* Tiptap editor — ensure placeholder and typed text are visible */
+.tiptap p.is-editor-empty:first-child::before {
+  color: rgba(255, 255, 255, 0.35);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap {
+  color: #e4e4e7;
+  min-height: 80px;
+  outline: none;
+}
+
+.tiptap:focus {
+  outline: none;
+}

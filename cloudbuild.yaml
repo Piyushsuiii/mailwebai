@@ -1,0 +1,48 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - gcr.io/mailwebai/mailwebai:$COMMIT_SHA
+      - -t
+      - gcr.io/mailwebai/mailwebai:latest
+      - --build-arg
+      - DATABASE_URL=$_DATABASE_URL
+      - --build-arg
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=$_NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+      - --build-arg
+      - CLERK_SECRET_KEY=$_CLERK_SECRET_KEY
+      - --build-arg
+      - NEXT_PUBLIC_CLERK_SIGN_IN_URL=$_NEXT_PUBLIC_CLERK_SIGN_IN_URL
+      - --build-arg
+      - NEXT_PUBLIC_CLERK_SIGN_UP_URL=$_NEXT_PUBLIC_CLERK_SIGN_UP_URL
+      - --build-arg
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=$_NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL
+      - --build-arg
+      - NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=$_NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL
+      - --build-arg
+      - NEXT_PUBLIC_URL=$_NEXT_PUBLIC_URL
+      - --build-arg
+      - AURINKO_CLIENT_ID=$_AURINKO_CLIENT_ID
+      - --build-arg
+      - AURINKO_CLIENT_SECRET=$_AURINKO_CLIENT_SECRET
+      - --build-arg
+      - AURINKO_SIGNING_SECRET=$_AURINKO_SIGNING_SECRET
+      - --build-arg
+      - OPENAI_API_KEY=$_OPENAI_API_KEY
+      - --build-arg
+      - STRIPE_SECRET_KEY=$_STRIPE_SECRET_KEY
+      - --build-arg
+      - STRIPE_WEBHOOK_SECRET=$_STRIPE_WEBHOOK_SECRET
+      - --build-arg
+      - NYLAS_CLIENT_ID=$_NYLAS_CLIENT_ID
+      - --build-arg
+      - NYLAS_API_KEY=$_NYLAS_API_KEY
+      - -f
+      - Dockerfile
+      - .
+images:
+  - 'gcr.io/mailwebai/mailwebai:$COMMIT_SHA'
+  - 'gcr.io/mailwebai/mailwebai:latest'
+options:
+  logging: CLOUD_LOGGING_ONLY
